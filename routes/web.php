@@ -37,6 +37,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/bookings', [AdminBooking::class, 'index'])->name('bookings.index');
     Route::get('/bookings/{booking}', [AdminBooking::class, 'show'])->name('bookings.show');
     Route::patch('/bookings/{booking}/status', [AdminBooking::class, 'updateStatus'])->name('bookings.status');
+    Route::post('/bookings/{booking}/complete', [AdminBooking::class, 'markCompleted'])->name('bookings.complete');
+    Route::post('/bookings/{booking}/cancel', [AdminBooking::class, 'cancel'])->name('bookings.cancel');
 
     // Payment Management
     Route::get('/payments', [AdminPayment::class, 'index'])->name('payments.index');
@@ -71,4 +73,15 @@ Route::middleware(['auth', 'customer'])->prefix('customer')->name('customer.')->
 Route::middleware('auth')->prefix('api')->group(function () {
     Route::get('/studios/{studio}/slots/{date}', [CustomerStudio::class, 'getAvailableSlots']);
     Route::get('/bookings/{booking}/qr', [CustomerBooking::class, 'getQRCode']);
+});
+
+// Redirect based on role after login
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        if (auth()->user()->isAdmin()) {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('customer.dashboard');
+        }
+    })->name('dashboard');
 });
