@@ -102,19 +102,6 @@
                     <p class="text-gray-400 text-sm">Customer Panel</p>
                 </div>
             </div>
-
-            <!-- User Info -->
-            <div class="mt-4 p-3 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
-                <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-accent-500 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-white text-sm"></i>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-white">{{ auth()->user()->name }}</p>
-                        <p class="text-xs text-gray-400">Customer</p>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Sidebar Menu -->
@@ -153,7 +140,7 @@
 
     <!-- Main Navbar -->
     <nav
-        class="fixed left-0 lg:left-64 right-0 top-0 h-16 bg-white/80 backdrop-blur-md border-b border-studio-200 z-30 px-6">
+        class="fixed left-0 lg:left-64 right-0 top-0 h-20 bg-white/80 backdrop-blur-md border-b border-studio-200 z-30 px-6">
         <div class="flex items-center justify-between h-full">
             <div class="flex items-center space-x-4">
                 <!-- Mobile Menu Toggle -->

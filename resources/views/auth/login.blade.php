@@ -1,4 +1,3 @@
-<!-- resources/views/auth/login.blade.php -->
 <!DOCTYPE html>
 <html lang="id">
 
@@ -7,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Studio Booking System</title>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -67,16 +65,13 @@
 
 <body
     class="min-h-screen bg-gradient-to-br from-studio-900 via-studio-800 to-studio-900 font-sans flex items-center justify-center p-4">
-    <!-- Background Elements -->
     <div class="absolute inset-0 overflow-hidden">
-        <!-- Animated circles -->
         <div class="absolute top-20 left-20 w-32 h-32 bg-accent-500/10 rounded-full animate-float"></div>
         <div class="absolute top-40 right-32 w-24 h-24 bg-accent-400/10 rounded-full animate-float"
             style="animation-delay: -2s;"></div>
         <div class="absolute bottom-32 left-40 w-20 h-20 bg-accent-600/10 rounded-full animate-float"
             style="animation-delay: -4s;"></div>
 
-        <!-- Music notes -->
         <div class="absolute top-1/4 right-1/4 text-accent-500/20 animate-pulse-slow">
             <i class="fas fa-music text-4xl"></i>
         </div>
@@ -85,33 +80,28 @@
         </div>
     </div>
 
-    <!-- Login Container -->
-    <div class="relative w-full max-w-md">
-        <!-- Login Card -->
+    <div class="relative w-full max-w-sm">
         <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
-            <!-- Header -->
-            <div class="bg-gradient-to-r from-studio-900 to-studio-800 px-8 py-8 text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-accent-500 rounded-2xl mb-4 shadow-lg">
+            <div class="bg-gradient-to-r from-studio-900 to-studio-800 px-6 py-6 text-center">
+                <div class="inline-flex items-center justify-center w-14 h-14 bg-accent-500 rounded-2xl mb-3 shadow-lg">
                     <i class="fas fa-music text-white text-2xl"></i>
                 </div>
-                <h1 class="text-2xl font-bold text-white mb-2">Studio Booking</h1>
+                <h1 class="text-xl font-bold text-white mb-1">Studio Booking</h1>
                 <p class="text-studio-300 text-sm">Masuk ke akun Anda untuk melanjutkan</p>
             </div>
 
-            <!-- Form -->
-            <div class="px-8 py-8">
+            <div class="px-6 py-6">
                 @if ($errors->any())
                     <div
-                        class="mb-6 bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 flex items-center space-x-3">
+                        class="mb-4 bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 flex items-center space-x-3">
                         <i class="fas fa-exclamation-circle text-red-500"></i>
                         <span class="text-sm">{{ $errors->first() }}</span>
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('login') }}" class="space-y-6">
+                <form method="POST" action="{{ route('login') }}" class="space-y-4">
                     @csrf
 
-                    <!-- Email Field -->
                     <div class="space-y-2">
                         <label for="email" class="block text-sm font-semibold text-studio-700">Email Address</label>
                         <div class="relative">
@@ -124,7 +114,6 @@
                         </div>
                     </div>
 
-                    <!-- Password Field -->
                     <div class="space-y-2">
                         <label for="password" class="block text-sm font-semibold text-studio-700">Password</label>
                         <div class="relative">
@@ -141,7 +130,6 @@
                         </div>
                     </div>
 
-                    <!-- Remember Me -->
                     <div class="flex items-center justify-between">
                         <label class="flex items-center">
                             <input type="checkbox" name="remember"
@@ -154,22 +142,19 @@
                         </a>
                     </div>
 
-                    <!-- Submit Button -->
                     <button type="submit"
                         class="w-full bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-accent-600 hover:to-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 transform hover:scale-[1.02] transition-all duration-200 shadow-lg">
                         <i class="fas fa-sign-in-alt mr-2"></i>
-                        Masuk ke Dashboard
+                        Login
                     </button>
                 </form>
 
-                <!-- Divider -->
-                <div class="my-8 flex items-center">
+                <div class="my-6 flex items-center">
                     <div class="flex-1 border-t border-studio-200"></div>
                     <span class="px-4 text-sm text-studio-500 bg-white">atau</span>
                     <div class="flex-1 border-t border-studio-200"></div>
                 </div>
 
-                <!-- Register Link -->
                 <div class="text-center">
                     <p class="text-studio-600 text-sm">
                         Belum memiliki akun?
@@ -182,8 +167,7 @@
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="text-center mt-8">
+        <div class="text-center mt-6">
             <p class="text-studio-300 text-sm">
                 © 2024 Studio Booking System. Built for music creators.
             </p>
