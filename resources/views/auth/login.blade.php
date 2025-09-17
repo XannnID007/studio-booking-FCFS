@@ -6,182 +6,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Studio Booking System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --primary-color: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary-color: #f8fafc;
-            --dark-color: #1e293b;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        studio: {
+                            50: '#fafafa',
+                            100: '#f4f4f5',
+                            200: '#e4e4e7',
+                            300: '#d4d4d8',
+                            400: '#a1a1aa',
+                            500: '#71717a',
+                            600: '#52525b',
+                            700: '#3f3f46',
+                            800: '#27272a',
+                            900: '#18181b'
+                        },
+                        accent: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': {
+                                transform: 'translateY(0px)'
+                            },
+                            '50%': {
+                                transform: 'translateY(-20px)'
+                            }
+                        }
+                    }
+                }
+            }
         }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-container {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            max-width: 400px;
-            width: 100%;
-            margin: 1rem;
-        }
-
-        .login-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
-            text-align: center;
-            padding: 2rem 1.5rem 1.5rem;
-        }
-
-        .login-header h3 {
-            margin: 0;
-            font-weight: 600;
-        }
-
-        .login-header p {
-            margin: 0.5rem 0 0;
-            opacity: 0.9;
-            font-size: 0.9rem;
-        }
-
-        .login-body {
-            padding: 2rem 1.5rem;
-        }
-
-        .form-control {
-            border: 1px solid #e2e8f0;
-            border-radius: 0.5rem;
-            padding: 0.75rem 1rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 1rem;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #64748b;
-            z-index: 5;
-        }
-
-        .input-group .form-control {
-            padding-left: 2.75rem;
-            margin-bottom: 0;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            border: none;
-            border-radius: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            font-weight: 500;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .login-footer {
-            text-align: center;
-            padding: 1rem 1.5rem 2rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 1rem;
-        }
-
-        .login-footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .login-footer a:hover {
-            color: var(--primary-dark);
-        }
-
-        .alert {
-            border: none;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            border: none;
-            background: none;
-            color: #64748b;
-            cursor: pointer;
-            z-index: 5;
-        }
-    </style>
+    </script>
 </head>
 
-<body>
-    <div class="login-container">
-        <div class="login-header">
-            <h3><i class="fas fa-music"></i> Studio Booking</h3>
-            <p>Masuk ke akun Anda</p>
+<body
+    class="min-h-screen bg-gradient-to-br from-studio-900 via-studio-800 to-studio-900 font-sans flex items-center justify-center p-4">
+    <!-- Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <!-- Animated circles -->
+        <div class="absolute top-20 left-20 w-32 h-32 bg-accent-500/10 rounded-full animate-float"></div>
+        <div class="absolute top-40 right-32 w-24 h-24 bg-accent-400/10 rounded-full animate-float"
+            style="animation-delay: -2s;"></div>
+        <div class="absolute bottom-32 left-40 w-20 h-20 bg-accent-600/10 rounded-full animate-float"
+            style="animation-delay: -4s;"></div>
+
+        <!-- Music notes -->
+        <div class="absolute top-1/4 right-1/4 text-accent-500/20 animate-pulse-slow">
+            <i class="fas fa-music text-4xl"></i>
         </div>
+        <div class="absolute bottom-1/4 left-1/4 text-accent-400/20 animate-pulse-slow" style="animation-delay: -1s;">
+            <i class="fas fa-guitar text-3xl"></i>
+        </div>
+    </div>
 
-        <div class="login-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <small><i class="fas fa-exclamation-circle"></i> {{ $errors->first() }}</small>
+    <!-- Login Container -->
+    <div class="relative w-full max-w-md">
+        <!-- Login Card -->
+        <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-studio-900 to-studio-800 px-8 py-8 text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-accent-500 rounded-2xl mb-4 shadow-lg">
+                    <i class="fas fa-music text-white text-2xl"></i>
                 </div>
-            @endif
+                <h1 class="text-2xl font-bold text-white mb-2">Studio Booking</h1>
+                <p class="text-studio-300 text-sm">Masuk ke akun Anda untuk melanjutkan</p>
+            </div>
 
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-                <div class="input-group">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" class="form-control" name="email" placeholder="Email"
-                        value="{{ old('email') }}" required autofocus>
-                </div>
+            <!-- Form -->
+            <div class="px-8 py-8">
+                @if ($errors->any())
+                    <div
+                        class="mb-6 bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 flex items-center space-x-3">
+                        <i class="fas fa-exclamation-circle text-red-500"></i>
+                        <span class="text-sm">{{ $errors->first() }}</span>
+                    </div>
+                @endif
 
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                        required>
-                    <button type="button" class="password-toggle" onclick="togglePassword()">
-                        <i class="fas fa-eye" id="toggleIcon"></i>
+                <form method="POST" action="{{ route('login') }}" class="space-y-6">
+                    @csrf
+
+                    <!-- Email Field -->
+                    <div class="space-y-2">
+                        <label for="email" class="block text-sm font-semibold text-studio-700">Email Address</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-studio-400"></i>
+                            </div>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                                autofocus placeholder="Masukkan email Anda"
+                                class="w-full pl-12 pr-4 py-3 bg-studio-50 border border-studio-200 rounded-xl text-studio-900 placeholder-studio-500 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200">
+                        </div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="space-y-2">
+                        <label for="password" class="block text-sm font-semibold text-studio-700">Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-studio-400"></i>
+                            </div>
+                            <input type="password" id="password" name="password" required
+                                placeholder="Masukkan password Anda"
+                                class="w-full pl-12 pr-12 py-3 bg-studio-50 border border-studio-200 rounded-xl text-studio-900 placeholder-studio-500 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all duration-200">
+                            <button type="button" onclick="togglePassword()"
+                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-studio-400 hover:text-studio-600 transition-colors">
+                                <i id="toggleIcon" class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center">
+                            <input type="checkbox" name="remember"
+                                class="w-4 h-4 text-accent-500 bg-studio-50 border-studio-300 rounded focus:ring-accent-500 focus:ring-2">
+                            <span class="ml-2 text-sm text-studio-600">Ingat saya</span>
+                        </label>
+                        <a href="#"
+                            class="text-sm text-accent-600 hover:text-accent-700 font-medium transition-colors">
+                            Lupa password?
+                        </a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-accent-600 hover:to-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 transform hover:scale-[1.02] transition-all duration-200 shadow-lg">
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        Masuk ke Dashboard
                     </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="my-8 flex items-center">
+                    <div class="flex-1 border-t border-studio-200"></div>
+                    <span class="px-4 text-sm text-studio-500 bg-white">atau</span>
+                    <div class="flex-1 border-t border-studio-200"></div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-sign-in-alt"></i> Masuk
-                </button>
-            </form>
+                <!-- Register Link -->
+                <div class="text-center">
+                    <p class="text-studio-600 text-sm">
+                        Belum memiliki akun?
+                        <a href="{{ route('register') }}"
+                            class="font-semibold text-accent-600 hover:text-accent-700 transition-colors">
+                            Daftar sekarang
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div class="login-footer">
-            <p>Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a></p>
+        <!-- Footer -->
+        <div class="text-center mt-8">
+            <p class="text-studio-300 text-sm">
+                © 2024 Studio Booking System. Built for music creators.
+            </p>
         </div>
     </div>
 
@@ -200,6 +205,13 @@
                 toggleIcon.classList.add('fa-eye');
             }
         }
+
+        // Form validation feedback
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Memproses...';
+            submitBtn.disabled = true;
+        });
     </script>
 </body>
 

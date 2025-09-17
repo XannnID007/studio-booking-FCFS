@@ -8,396 +8,248 @@
     <title>@yield('title') - Studio Booking System</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Studio Music Theme Colors
+                        studio: {
+                            50: '#fafafa',
+                            100: '#f4f4f5',
+                            200: '#e4e4e7',
+                            300: '#d4d4d8',
+                            400: '#a1a1aa',
+                            500: '#71717a',
+                            600: '#52525b',
+                            700: '#3f3f46',
+                            800: '#27272a',
+                            900: '#18181b'
+                        },
+                        accent: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12'
+                        },
+                        success: {
+                            500: '#10b981',
+                            600: '#059669'
+                        },
+                        warning: {
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        },
+                        danger: {
+                            500: '#ef4444',
+                            600: '#dc2626'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        :root {
-            --primary-color: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary-color: #f8fafc;
-            --dark-color: #1e293b;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --light-gray: #f1f5f9;
-            --border-color: #e2e8f0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--light-gray);
-            color: var(--dark-color);
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: 260px;
-            height: 100vh;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            position: fixed;
-            left: 0;
-            top: 0;
-            z-index: 1000;
-            overflow-y: auto;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar-header h4 {
-            color: white;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .user-info {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-        }
-
-        .sidebar-menu {
-            padding: 1rem 0;
-        }
-
-        .menu-item {
-            display: block;
-            padding: 0.875rem 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-        }
-
-        .menu-item:hover,
-        .menu-item.active {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .menu-item i {
-            width: 20px;
-            margin-right: 0.75rem;
-        }
-
-        /* Navbar Styles */
-        .main-navbar {
-            background: white;
-            border-bottom: 1px solid var(--border-color);
-            padding: 0.75rem 1.5rem;
-            position: fixed;
-            left: 260px;
-            right: 0;
-            top: 0;
-            z-index: 999;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-        }
-
-        .navbar-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-title h5 {
-            margin: 0;
-            font-weight: 600;
-            color: var(--dark-color);
-        }
-
-        .navbar-actions .dropdown-toggle {
-            background: none;
-            border: none;
-            color: var(--dark-color);
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .navbar-actions .dropdown-toggle:hover {
-            background-color: var(--light-gray);
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: 260px;
-            margin-top: 80px;
-            padding: 2rem;
-            min-height: calc(100vh - 80px);
-        }
-
-        /* Cards */
-        .card {
-            border: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            border-radius: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-header {
-            background: white;
-            border-bottom: 1px solid var(--border-color);
-            padding: 1.25rem 1.5rem;
-            font-weight: 600;
-        }
-
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        /* Buttons */
-        .btn {
-            border-radius: 0.5rem;
-            font-weight: 500;
-            padding: 0.625rem 1.25rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .btn-success {
-            background: var(--success-color);
-            border: none;
-        }
-
-        .btn-warning {
-            background: var(--warning-color);
-            border: none;
-        }
-
-        .btn-danger {
-            background: var(--danger-color);
-            border: none;
-        }
-
-        /* Tables */
-        .table {
-            background: white;
-            border-radius: 0.75rem;
-            overflow: hidden;
-        }
-
-        .table th {
-            background-color: var(--secondary-color);
-            border: none;
-            font-weight: 600;
-            color: var(--dark-color);
-        }
-
-        .table td {
-            border-color: var(--border-color);
-            vertical-align: middle;
-        }
-
-        /* Status Badges */
-        .badge {
-            font-size: 0.75rem;
-            padding: 0.375rem 0.75rem;
-            border-radius: 0.375rem;
-        }
-
-        /* Forms */
-        .form-control,
-        .form-select {
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            padding: 0.625rem 0.875rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
-        }
-
-        /* Studio Cards */
-        .studio-card {
-            transition: all 0.3s ease;
-            border: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .studio-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .studio-image {
-            height: 200px;
-            object-fit: cover;
-            border-radius: 0.75rem 0.75rem 0 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.show {
-                transform: translateX(0);
-            }
-
-            .main-navbar {
-                left: 0;
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 1rem;
-            }
-
-            .navbar-content .navbar-title h5 {
-                font-size: 1rem;
-            }
-        }
-
         /* Custom scrollbar */
-        .sidebar::-webkit-scrollbar {
+        .scrollbar-thin::-webkit-scrollbar {
             width: 4px;
         }
 
-        .sidebar::-webkit-scrollbar-track {
+        .scrollbar-thin::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .sidebar::-webkit-scrollbar-thumb {
+        .scrollbar-thin::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.3);
             border-radius: 2px;
-        }
-
-        /* Mobile sidebar toggle */
-        .sidebar-toggle {
-            display: none;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar-toggle {
-                display: inline-block;
-            }
         }
     </style>
 
     @stack('styles')
 </head>
 
-<body>
+<body class="bg-studio-50 font-sans">
+    <!-- Mobile Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 z-40 lg:hidden hidden"></div>
+
     <!-- Sidebar -->
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h4><i class="fas fa-music"></i> Studio Booking</h4>
-            <div class="user-info">
-                <i class="fas fa-user"></i> {{ auth()->user()->name }}
+    <nav id="sidebar"
+        class="fixed left-0 top-0 h-screen w-64 bg-gradient-to-br from-studio-900 via-studio-800 to-studio-900 text-white z-50 overflow-y-auto scrollbar-thin transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+        <!-- Sidebar Header -->
+        <div class="p-6 border-b border-white/10">
+            <div class="flex items-center space-x-3">
+                <div
+                    class="w-10 h-10 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-music text-white text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold">Studio Booking</h4>
+                    <p class="text-gray-400 text-sm">Customer Panel</p>
+                </div>
+            </div>
+
+            <!-- User Info -->
+            <div class="mt-4 p-3 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-accent-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-white">{{ auth()->user()->name }}</p>
+                        <p class="text-xs text-gray-400">Customer</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="sidebar-menu">
+
+        <!-- Sidebar Menu -->
+        <div class="p-4 space-y-2">
             <a href="{{ route('customer.dashboard') }}"
-                class="menu-item {{ request()->routeIs('customer.dashboard') ? 'active' : '' }}">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
+                class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group {{ request()->routeIs('customer.dashboard') ? 'bg-accent-500 text-white shadow-lg' : 'text-gray-300 hover:text-white hover:bg-white/10' }}">
+                <i class="fas fa-tachometer-alt w-5"></i>
+                <span class="font-medium">Dashboard</span>
             </a>
+
             <a href="{{ route('customer.studios.index') }}"
-                class="menu-item {{ request()->routeIs('customer.studios.*') ? 'active' : '' }}">
-                <i class="fas fa-building"></i> Browse Studio
+                class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group {{ request()->routeIs('customer.studios.*') ? 'bg-accent-500 text-white shadow-lg' : 'text-gray-300 hover:text-white hover:bg-white/10' }}">
+                <i class="fas fa-building w-5"></i>
+                <span class="font-medium">Browse Studio</span>
             </a>
+
             <a href="{{ route('customer.bookings.index') }}"
-                class="menu-item {{ request()->routeIs('customer.bookings.*') ? 'active' : '' }}">
-                <i class="fas fa-calendar-check"></i> My Bookings
+                class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group {{ request()->routeIs('customer.bookings.*') ? 'bg-accent-500 text-white shadow-lg' : 'text-gray-300 hover:text-white hover:bg-white/10' }}">
+                <i class="fas fa-calendar-check w-5"></i>
+                <span class="font-medium">My Bookings</span>
             </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-history"></i> History
+
+            <a href="#"
+                class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group">
+                <i class="fas fa-history w-5"></i>
+                <span class="font-medium">History</span>
             </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-user-cog"></i> Profile
+
+            <a href="#"
+                class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group">
+                <i class="fas fa-user-cog w-5"></i>
+                <span class="font-medium">Profile</span>
             </a>
         </div>
     </nav>
 
     <!-- Main Navbar -->
-    <nav class="main-navbar">
-        <div class="navbar-content">
-            <div class="d-flex align-items-center">
-                <button class="sidebar-toggle me-3" onclick="toggleSidebar()">
-                    <i class="fas fa-bars"></i>
+    <nav
+        class="fixed left-0 lg:left-64 right-0 top-0 h-16 bg-white/80 backdrop-blur-md border-b border-studio-200 z-30 px-6">
+        <div class="flex items-center justify-between h-full">
+            <div class="flex items-center space-x-4">
+                <!-- Mobile Menu Toggle -->
+                <button id="sidebar-toggle"
+                    class="lg:hidden p-2 text-studio-600 hover:text-studio-900 hover:bg-studio-100 rounded-lg transition-colors">
+                    <i class="fas fa-bars text-lg"></i>
                 </button>
-                <div class="navbar-title">
-                    <h5>@yield('page-title', 'Dashboard')</h5>
+
+                <div>
+                    <h1 class="text-2xl font-bold text-studio-900">@yield('page-title', 'Dashboard')</h1>
+                    <p class="text-sm text-studio-500 hidden sm:block">Temukan dan booking studio musik favorit Anda</p>
                 </div>
             </div>
-            <div class="navbar-actions">
-                <div class="dropdown">
-                    <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        <i class="fas fa-user-circle"></i> {{ auth()->user()->name }}
+
+            <div class="flex items-center space-x-4">
+                <!-- Notifications -->
+                <button
+                    class="relative p-2 text-studio-500 hover:text-studio-700 hover:bg-studio-100 rounded-lg transition-colors">
+                    <i class="fas fa-bell text-lg"></i>
+                    <span class="absolute -top-1 -right-1 w-3 h-3 bg-accent-500 rounded-full"></span>
+                </button>
+
+                <!-- User Dropdown -->
+                <div class="relative group">
+                    <button
+                        class="flex items-center space-x-3 p-2 text-studio-700 hover:bg-studio-100 rounded-lg transition-colors">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-white text-sm"></i>
+                        </div>
+                        <span class="font-medium hidden sm:block">{{ auth()->user()->name }}</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                                @csrf
-                                <button type="submit" class="dropdown-item">
-                                    <i class="fas fa-sign-out-alt"></i> Logout
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
+
+                    <!-- Dropdown Menu -->
+                    <div
+                        class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-studio-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="#"
+                            class="flex items-center space-x-2 px-4 py-2 text-studio-700 hover:bg-studio-50 transition-colors">
+                            <i class="fas fa-user w-4"></i>
+                            <span>Profile</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center space-x-2 px-4 py-2 text-studio-700 hover:bg-studio-50 transition-colors">
+                            <i class="fas fa-cog w-4"></i>
+                            <span>Settings</span>
+                        </a>
+                        <hr class="my-2 border-studio-200">
+                        <form method="POST" action="{{ route('logout') }}" class="block">
+                            @csrf
+                            <button type="submit"
+                                class="flex items-center space-x-2 w-full px-4 py-2 text-danger-600 hover:bg-danger-50 transition-colors">
+                                <i class="fas fa-sign-out-alt w-4"></i>
+                                <span>Logout</span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="lg:ml-64 mt-16 p-6">
+        <!-- Success Alert -->
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fas fa-check-circle"></i> {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <div
+                class="mb-6 bg-success-50 border border-success-200 text-success-800 rounded-xl p-4 flex items-center space-x-3">
+                <i class="fas fa-check-circle text-success-500"></i>
+                <span>{{ session('success') }}</span>
+                <button onclick="this.parentElement.remove()" class="ml-auto text-success-500 hover:text-success-700">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         @endif
 
+        <!-- Error Alert -->
         @if (session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="fas fa-exclamation-circle"></i> {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <div class="mb-6 bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 flex items-center space-x-3">
+                <i class="fas fa-exclamation-circle text-red-500"></i>
+                <span>{{ session('error') }}</span>
+                <button onclick="this.parentElement.remove()" class="ml-auto text-red-500 hover:text-red-700">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         @endif
 
+        <!-- Warning Alert -->
         @if (session('warning'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <i class="fas fa-exclamation-triangle"></i> {{ session('warning') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <div
+                class="mb-6 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-xl p-4 flex items-center space-x-3">
+                <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                <span>{{ session('warning') }}</span>
+                <button onclick="this.parentElement.remove()" class="ml-auto text-yellow-500 hover:text-yellow-700">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         @endif
 
@@ -405,33 +257,46 @@
     </main>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script>
+        // Mobile Sidebar Toggle
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('show');
+            sidebar.classList.toggle('-translate-x-full');
+            sidebarBackdrop.classList.toggle('hidden');
         }
+
+        sidebarToggle?.addEventListener('click', toggleSidebar);
+        sidebarBackdrop?.addEventListener('click', toggleSidebar);
 
         // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            const toggle = document.querySelector('.sidebar-toggle');
-
-            if (window.innerWidth <= 768) {
-                if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
-                    sidebar.classList.remove('show');
+            if (window.innerWidth <= 1024) {
+                if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebarBackdrop.classList.add('hidden');
                 }
             }
         });
 
         // Handle window resize
         window.addEventListener('resize', function() {
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth > 768) {
-                sidebar.classList.remove('show');
+            if (window.innerWidth >= 1024) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebarBackdrop.classList.add('hidden');
             }
         });
+
+        // Auto-hide alerts after 5 seconds
+        setTimeout(() => {
+            document.querySelectorAll('.bg-success-50, .bg-red-50, .bg-yellow-50').forEach(alert => {
+                alert.style.transition = 'opacity 0.5s ease-in-out';
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 500);
+            });
+        }, 5000);
     </script>
 
     @stack('scripts')
