@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 // Public Routes
 Route::get('/', function () {
-    return redirect('/login');
+    return view('welcome');
 });
 
 // Auth Routes
